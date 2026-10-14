@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FastBite | Sign in</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <div class="brand-mark">🍔</div>
+    <p class="eyebrow">FAST, FRESH, DELICIOUS</p>
+    <h1>Welcome to <span>FastBite</span></h1>
+    <p class="muted">Sign in to order your favourites.</p>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}<div class="alert">{{ message }}</div>{% endfor %}
+    {% endwith %}
+    <form method="post" class="login-form">
+      <label for="username">Username</label><input id="username" name="username" autocomplete="username" required placeholder="Enter username">
+      <label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Enter password">
+      <button type="submit" class="primary-btn">Sign in <span>→</span></button>
+    </form>
+    <div class="demo-box"><strong>Demo login</strong><br>Username: <code>admin</code><br>Password: <code>fastbite123</code></div>
+    <p class="fine-print">Coursework demo only — do not use these credentials in production.</p>
+  </main>
+</body>
+</html>

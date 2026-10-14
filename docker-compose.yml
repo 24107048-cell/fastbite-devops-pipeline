@@ -1,0 +1,51 @@
+services:
+  app:
+    build: .
+    image: fastbite-app:local
+    container_name: fastbite-app
+    restart: unless-stopped
+    environment:
+      FLASK_SECRET_KEY: coursework-demo-secret-change-me
+    ports:
+      - "5001:5000"
+    networks:
+      - fastbite-net
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: fastbite-prometheus
+    restart: unless-stopped
+    ports:
+      - "9096:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - app
+    networks:
+      - fastbite-net
+
+  grafana:
+    image: grafana/grafana:11.2.2
+    container_name: fastbite-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: fastbiteadmin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "3002:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    networks:
+      - fastbite-net
+
+networks:
+  fastbite-net:
+    driver: bridge
+
+volumes:
+  grafana-data:

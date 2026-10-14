@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FastBite | Food ordering</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-icon">🍔</span> Fast<span>Bite</span></a>
+    <nav><a href="#menu">Menu</a><a href="#orders">Order history</a><span class="user-pill">Hi, {{ username }}</span><a class="logout" href="/logout">Logout</a></nav>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div><p class="eyebrow">YOUR CRAVINGS, DELIVERED</p><h1>Good food.<br><span>Good mood.</span></h1><p>Fresh favourites, easy ordering, and a little happiness in every bite.</p><a class="primary-btn hero-btn" href="#menu">Explore menu <span>↓</span></a></div>
+      <div class="hero-art"><div class="sun"></div><div class="hero-emoji">🍔</div><div class="floating-chip chip-one">Fresh daily ✨</div><div class="floating-chip chip-two">Made with love ❤️</div></div>
+    </section>
+    <section id="menu" class="section">
+      <div class="section-heading"><div><p class="eyebrow">MADE FOR YOU</p><h2>Our popular menu</h2></div><p>Pick your favourites and add them to your cart.</p></div>
+      <div id="product-grid" class="product-grid"><p>Loading menu…</p></div>
+    </section>
+    <section class="order-layout">
+      <div class="panel cart-panel"><div class="panel-heading"><h2>🛒 Your cart</h2><span id="cart-count" class="count-pill">0 items</span></div><div id="cart-items" class="cart-items"><p class="muted">Your cart is empty.</p></div><div class="cart-total"><span>Total</span><strong id="cart-total">₹0</strong></div><button id="checkout-btn" class="primary-btn full-width">Place order <span>→</span></button><p id="cart-message" class="status-message"></p></div>
+      <div id="orders" class="panel history-panel"><div class="panel-heading"><h2>📦 Order history</h2><button id="refresh-orders" class="text-btn">Refresh ↻</button></div><div id="order-history"><p class="muted">Your recent orders will appear here.</p></div></div>
+    </section>
+    <footer>Made for a DevOps coursework demo · FastBite <span>●</span> Freshly served</footer>
+  </main>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
